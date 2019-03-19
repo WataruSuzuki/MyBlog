@@ -22,8 +22,8 @@ import java.io.IOException;
 public class ClassifierFloatMobileNet extends Classifier {
 
   /** MobileNet requires additional normalization of the used input. */
-  private static final float IMAGE_MEAN = 127.5f;
-  private static final float IMAGE_STD = 127.5f;
+  private static final float IMAGE_MEAN = 128.0f;
+  private static final float IMAGE_STD = 128.0f;
 
   /**
    * An array to hold inference results, to be feed into Tensorflow Lite as outputs. This isn't part
@@ -39,17 +39,18 @@ public class ClassifierFloatMobileNet extends Classifier {
   public ClassifierFloatMobileNet(Activity activity, Device device, int numThreads)
       throws IOException {
     super(activity, device, numThreads);
-    labelProbArray = new float[1][getNumLabels()];
+//    labelProbArray = new float[1][getNumLabels()];
+    labelProbArray = new float[1][3];
   }
 
   @Override
   public int getImageSizeX() {
-    return 224;
+    return 50;
   }
 
   @Override
   public int getImageSizeY() {
-    return 224;
+    return 50;
   }
 
   @Override
@@ -57,7 +58,7 @@ public class ClassifierFloatMobileNet extends Classifier {
     // you can download this file from
     // see build.gradle for where to obtain this file. It should be auto
     // downloaded into assets.
-    return "mobilenet_v1_1.0_224.tflite";
+    return "converted_model.tflite";
   }
 
   @Override
